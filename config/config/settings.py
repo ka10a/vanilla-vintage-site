@@ -31,6 +31,16 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# EMAIL SETTINGS
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'Vanilla Vintage <vanilla-vintage@gmail.com>'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,7 +53,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'post',
-    'items',
 ]
 
 MIDDLEWARE = [

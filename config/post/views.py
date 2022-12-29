@@ -11,6 +11,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
 from .forms import OrderForm, ContactForm
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -31,22 +32,21 @@ def contacts(request):
             form.save()
 
             name = form.cleaned_data['name']
-            recipient = form.cleaned_data['email']
-            address = form.cleaned_data['address']
-            ids = form.cleaned_data['ids']
-            subj = 'Order in Vanilla Vintage Shop'
-            text = '''Hello, {}! You placed your order in our site recently. Our manager contacts you soon.'''
+            email = form.cleaned_data['email']
+            subj = form.cleaned_data['subj']
+            text = form.cleaned_data['text']
 
             send_mail(
-                    subj,
-                    text.format(name),
-                    'vanilla-vintage@gmail.com',
-                    [recipient])
+                "From {}, {}".format(name, subj),
+                text,
+                email,
+                ['vanilla-vintage@gmail.com'])
     else:
         form = ContactForm()
     return HttpResponse(loader.get_template('contact.html').render({'form': form}, request))
 
 
+@csrf_exempt
 def products(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -54,18 +54,20 @@ def products(request):
             form.save()
 
             name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            subj = form.cleaned_data['subj']
-            text = form.cleaned_data['text']
+            recipient = form.cleaned_data['email']
+            address = form.cleaned_data['address']
+            ids = form.cleaned_data['ids']
+            subj = 'Order in Vanilla Vintage Shop'
+            text = '''Hello, {}! You placed your order in our site recently. Our manager contacts you soon.'''
 
             send_mail(
-                    "From {}, {}".format(name, subj),
-                    text,
-                    email,
-                    ['vanilla-vintage@gmail.com'])
-    else:
-        form = OrderForm()
-        item_list = Item.objects.all()
+                subj,
+                text.format(name),
+                'vanilla-vintage@gmail.com',
+                [recipient])
+
+    form = OrderForm()
+    item_list = Item.objects.all()
     return HttpResponse(loader.get_template('products.html').render({'item_list': item_list, 'form': form}, request))
 
 
