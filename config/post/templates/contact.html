@@ -118,6 +118,34 @@
               <h2>Send us a Message</h2>
             </div>
           </div>
+          <div id="form" class="modal">
+            <div class="contact-form">
+              <form id="contact" action="" method="post">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                     {{ form.name.errors }}
+                     {{ form.name }}
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    {{ form.email.errors }}
+                    {{ form.email }}
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    {{ form.subj.errors }}
+                    {{ form.subj }}
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    {{ form.text.errors }}
+                    {{ form.text }}
+                  </div>
+                  <div class="col-lg-12">
+                      <button type="submit" id="form-submit" class="filled-button">Send Message</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+             <!--
           <div class="col-md-8">
             <div class="contact-form">
               <form id="contact" action="" method="post">
@@ -151,6 +179,7 @@
               </form>
             </div>
           </div>
+          -->
         </div>
       </div>
     </div>

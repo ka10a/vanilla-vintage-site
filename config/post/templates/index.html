@@ -16,7 +16,6 @@
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Additional CSS Files -->
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
     <link rel="stylesheet" href="{% static 'css/templatemo-sixteen.css' %}">
     <link rel="stylesheet" href="{% static 'css/owl.css' %}">
@@ -100,36 +99,27 @@
               <a href="{% url 'products' %}">view all products <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="p1"><img src="{% static 'images/bag.jpg' %}" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Reticule</h4></a>
-                <h6>$25.75</h6>
-                <p>Black laquered reticule made of textures leather</p>
+          {% for item in item_list %}
+            <div class="col-lg-4 col-md-4 all {{ item.category }}">
+              <div class="product-item">
+                <a href="#"><img src="{% static 'images/bag.jpg' %}" alt=""></a>
+                <div class="down-content">
+                  <a href="#p1" rel="modal:open"><h4>{{ item.name }}</h4></a>
+                  {% if item.category == 'gra' %}
+                    <h6>Sold</h6>
+                  {% endif %}
+                  {% if item.category == 'poi' %}
+                    <h6><s>${{ item.price }}</s> ${{ item.disc_price }}</h6>
+                  {% endif %}
+                  {% if item.category == 'des' %}
+                    <h6>${{ item.price }}</h6>
+                  {% endif %}
+                  <p>{{ item.desc }}</p>
+                  <p><a href="#form" rel="modal:open">Buy</a></p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="p2"><img src="{% static 'images/cargo.jpg' %}" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Cargo trousers</h4></a>
-                <h6>$30.25</h6>
-                <p>Sand colored cargo trousers with big pockets</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="p3"><img src="{% static 'images/coat_fur.jpg' %}" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Fur coat</h4></a>
-                <h6>$40.45</h6>
-                <p>Soft and warm quilted fur coat</p>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -147,7 +137,7 @@
               <h4>Looking for the best products?</h4>
               <p>INSTRUCTION: to buy products please click on the name of product copy the id and click buy, fill up the form and puts desired IDs inside for us to contact with you further on</p>
               <p>Subscribe to the new drops/offers of our shop by launching e-mail notifications</p>
-              <a href="{% url 'contacts' %}"" class="filled-button">Contact us</a>
+              <a href="{% url 'contacts' %}" class="filled-button">Contact us</a>
             </div>
           </div>
           <div class="col-md-6">
