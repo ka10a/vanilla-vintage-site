@@ -36,11 +36,18 @@ def contacts(request):
             subj = form.cleaned_data['subj']
             text = form.cleaned_data['text']
 
+            text_msg = '''{}
+            __________
+            
+            Sent via backend
+            Message from {} by {}
+            '''
+
             send_mail(
                 "From {}, {}".format(name, subj),
-                text,
-                email,
-                ['vanilla-vintage@gmail.com'])
+                text_msg.format(text, email, name),
+                'vintage.vanilla.and.co@gmail.com',
+                ['vintage.vanilla.and.co@gmail.com'])
     else:
         form = ContactForm()
     return HttpResponse(loader.get_template('contact.html').render({'form': form}, request))
@@ -63,7 +70,7 @@ def products(request):
             send_mail(
                 subj,
                 text.format(name),
-                'vanilla-vintage@gmail.com',
+                'vintage.vanilla.and.co@gmail.com',
                 [recipient])
 
     form = OrderForm()
