@@ -28,7 +28,7 @@ SECRET_KEY = "#00bh0*!bkf9u5behnymn0rmo78oqv!(08j83^%#^@bwv_z)wj"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['164.92.145.44']
 
 
 # EMAIL SETTINGS
