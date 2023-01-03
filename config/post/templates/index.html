@@ -93,33 +93,73 @@
     <div class="latest-products">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div class="section-heading">
-              <h2>Latest Products</h2>
-              <a href="{% url 'products' %}">view all products <i class="fa fa-angle-right"></i></a>
+          <div id="form" class="modal">
+            <div class="contact-form">
+              <form id="contact" action="" method="post">
+                <div class="row">
+                  {% csrf_token %}
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                     {{ form.name.errors }}
+                     {{ form.name }}
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    {{ form.email.errors }}
+                    {{ form.email }}
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    {{ form.address.errors }}
+                    {{ form.address }}
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    {{ form.ids.errors }}
+                    {{ form.ids }}
+                  </div>
+                  <div class="col-lg-12">
+                      <button type="submit" id="form-submit" class="filled-button">Submit</button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
+
           {% for item in item_list %}
-            <div class="col-lg-4 col-md-4 all {{ item.category }}">
-              <div class="product-item">
-                <a href="#"><img src="{% static 'images/bag.jpg' %}" alt=""></a>
-                <div class="down-content">
-                  <a href="#p1" rel="modal:open"><h4>{{ item.name }}</h4></a>
-                  {% if item.category == 'gra' %}
-                    <h6>Sold</h6>
-                  {% endif %}
-                  {% if item.category == 'poi' %}
-                    <h6><s>${{ item.price }}</s> ${{ item.disc_price }}</h6>
-                  {% endif %}
-                  {% if item.category == 'des' %}
-                    <h6>${{ item.price }}</h6>
-                  {% endif %}
-                  <p>{{ item.desc }}</p>
-                  <p><a href="#form" rel="modal:open">Buy</a></p>
-                </div>
-              </div>
+            <div id='p' + str({{ item.id }}) class="modal">
+              <p>ID of product #{{ item.id }}</p>
             </div>
           {% endfor %}
+
+
+          <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                      <h2>Latest Products</h2>
+                      <a href="{% url 'products' %}">view all products <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+                {% for item in item_list %}
+                    <div class="col-lg-4 col-md-4 all {{ item.category }}">
+                      <div class="product-item">
+                        <a href="#"><img src="{% static ''|add:item.img|add:'' %}" alt=""></a>
+                        <div class="down-content">
+                          <a href="#p" + str({{ item.id }}) rel="modal:open"><h4>{{ item.name }}</h4></a>
+                          {% if item.category == 'gra' %}
+                            <h6>Sold</h6>
+                          {% endif %}
+                          {% if item.category == 'poi' %}
+                            <h6><s>${{ item.price }}</s> ${{ item.disc_price }}</h6>
+                          {% endif %}
+                          {% if item.category == 'des' %}
+                            <h6>${{ item.price }}</h6>
+                          {% endif %}
+                          <p>{{ item.desc }}</p>
+                          <p><a href="#form" rel="modal:open">Buy</a></p>
+                        </div>
+                      </div>
+                    </div>
+                {% endfor %}
+            </div>
+          </div>
         </div>
       </div>
     </div>

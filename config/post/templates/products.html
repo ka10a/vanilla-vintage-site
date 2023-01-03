@@ -128,36 +128,12 @@
             </div>
           </div>
 
-          <div id="p1" class="modal">
-            <p>ID of product #101</p>
-          </div>
-          <div id="p2" class="modal">
-            <p>ID of product #102</p>
-          </div>
-          <div id="p3" class="modal">
-            <p>ID of product #103</p>
-          </div>
-          <div id="p4" class="modal">
-            <p>ID of product #104</p>
-          </div>
-          <div id="p5" class="modal">
-            <p>ID of product #105</p>
-          </div>
-          <div id="p6" class="modal">
-            <p>ID of product #106</p>
-          </div>
-          <div id="p7" class="modal">
-            <p>ID of product #107</p>
-          </div>
-          <div id="p8" class="modal">
-            <p>ID of product #108</p>
-          </div>
-          <div id="p9" class="modal">
-            <p>ID of product #109</p>
-          </div>
-          <div id="p10" class="modal">
-            <p>ID of product #110</p>
-          </div>
+          {% for item in item_list %}
+            <div id= 'p' + str({{ item.id }}) class="modal">
+              <p>ID of product #{{ item.id }}</p>
+            </div>
+          {% endfor %}
+
 
           <div class="col-md-12">
             <div class="filters-content">
@@ -167,7 +143,7 @@
                           <div class="product-item">
                             <a href="#"><img src="{% static ''|add:item.img|add:'' %}" alt=""></a>
                             <div class="down-content">
-                              <a href="#p1" rel="modal:open"><h4>{{ item.name }}</h4></a>
+                              <a href="#p" + str({{ item.id }}) rel="modal:open"><h4>{{ item.name }}</h4></a>
                               {% if item.category == 'gra' %}
                                 <h6>Sold</h6>
                               {% endif %}
